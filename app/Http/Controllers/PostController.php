@@ -16,8 +16,6 @@ class PostController extends Controller
      */
     public function index()
     {
-
-
         $posts = Post::query()->orderBy('created_at', 'DESC')->simplePaginate(perPage: 5);
 
         return view('posts.index', [

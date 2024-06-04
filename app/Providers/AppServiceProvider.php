@@ -2,7 +2,12 @@
 
 namespace App\Providers;
 
+use App\Contracts\TestInterface;
+use App\Http\Requests\Post\StoreRequest;
+use App\Models\Post;
+use App\Policies\PostPolicy;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Route;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +24,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Route::model('post', Post::class);
     }
 }

@@ -12,8 +12,24 @@
     <ul class="flex flex-col gap-4">
         @foreach ($posts as $post)
         <li class="flex flex-col gap-2">
+
+            <div class="flex justify-between gap-4">
             <h2 class="font-semibold">{{ $post->title }}</h2>
+            @can('update', $post)
+            {{-- <a href="{{ route('posts.edit', [$post])}}" class="text-blue-500">Edit</a> --}}
+            <x-primary-button type="button">
+                <span>Edit</span>
+            </x-primary-button>
+
+            <x-custom-link class="text-white bg-red-500" method="DELETE" href="{{ route('posts.destroy', [$post]) }}">
+                Cancella
+            </x-custom-link>
+            @endcan
+
+        </div>
             <p class="text-gray-500 text-sm">{{ $post->content }}</p>
+
+
         </li>
         @endforeach
     </ul>

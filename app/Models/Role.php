@@ -17,7 +17,14 @@ class Role extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'role_user', 'role_name', 'user_id', 'name', 'id');
+        return $this->belongsToMany(
+            User::class,
+            table: 'role_user',
+            foreignPivotKey: 'role_name',
+            relatedPivotKey: 'user_id',
+            parentKey: 'name',
+            relatedKey: 'id',
+        );
     }
 
     protected function name(): Attribute

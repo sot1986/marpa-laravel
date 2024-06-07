@@ -24,6 +24,7 @@ class User extends Authenticatable
         'password',
     ];
 
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -74,7 +75,48 @@ class User extends Authenticatable
     protected function fullNameAndEmail(): Attribute
     {
         return Attribute::get(
-            fn ($value, $attributes) => "{$attributes['name']} {$attributes['email']}",
+            fn ($valoreInutile, $attr) => $this->maiusc_name . ' ' . $this->email,
+        );
+    }
+
+    protected function maiuscName(): Attribute
+    {
+        return Attribute::get(
+            fn ($valoreInutile, $attr) => strtoupper($attr['name']),
+        );
+    }
+
+    protected function mobileNumber(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->profile?->phone ?? 'N/A',
+            set: function ($value) {
+                if ($this->profile) {
+                    $this->profile->phone = $value;
+                    $this->profile->save();
+                    return;
+                }
+
+                $this->profile()->create(['phone' => $value]);
+            },
+        );
+
+        /**
+         * $user->mobile_number = "+3495876218";
+         */
+    }
+
+    protected function fullName(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value, $attributes) => "{$attributes['name']} {$attributes['surname']}",
+            set: function ($value, $attributes) {
+                [$name, $surname] = explode(' ', $value, 2);
+                return [
+                    'name' => $name,
+                    'surname' => $surname
+                ];
+            }
         );
     }
 }

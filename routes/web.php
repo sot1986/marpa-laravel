@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TestQueryController;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -28,5 +29,10 @@ Route::get("/posts/{post}", [\App\Http\Controllers\PostController::class, 'show'
 Route::get("/test-query", App\Http\Controllers\TestQueryController::class);
 
 Route::get("/posts/{post}", [\App\Http\Controllers\PostController::class, 'show'])->name("posts.show");
+Route::get("test-email", function () {
+    $email = new \App\Mail\SalutaTutti("Matteo");
+
+    Mail::send($email);
+});
 
 require __DIR__ . '/auth.php';

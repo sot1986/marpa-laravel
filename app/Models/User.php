@@ -110,7 +110,7 @@ class User extends Authenticatable
     {
         return Attribute::make(
             get: fn ($value, $attributes) => "{$attributes['name']} {$attributes['surname']}",
-            set: function ($value, $attributes) {
+            set: function ($value) {
                 [$name, $surname] = explode(' ', $value, 2);
                 return [
                     'name' => $name,

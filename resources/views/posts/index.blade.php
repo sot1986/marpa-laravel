@@ -17,12 +17,12 @@
             <h2 class="font-semibold">{{ $post->title }}</h2>
             @can('update', $post)
             {{-- <a href="{{ route('posts.edit', [$post])}}" class="text-blue-500">Edit</a> --}}
-            <x-primary-button type="button">
+            <x-custom.button type="button">
                 <span>Edit</span>
-            </x-primary-button>
+            </x-custom.button>
 
             <x-custom-link class="text-white bg-red-500" method="DELETE" href="{{ route('posts.destroy', [$post]) }}">
-                Cancella
+
             </x-custom-link>
             @endcan
 

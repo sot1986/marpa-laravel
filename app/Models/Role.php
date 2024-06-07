@@ -24,6 +24,7 @@ class Role extends Model
             relatedPivotKey: 'user_id',
             parentKey: 'name',
             relatedKey: 'id',
+            relation: 'users'
         );
     }
 
